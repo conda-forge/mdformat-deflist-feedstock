@@ -11,16 +11,16 @@ source:
 
 build:
   noarch: python
-  script: {{ PYTHON }} -m pip install . -vv
+  script: {{ PYTHON }} -m pip install . -vv --no-deps --no-build-isolation
   number: 0
 
 requirements:
   host:
-    - python >=3.7
+    - python {{ python_min }}
     - flit-core >=2,<4
     - pip
   run:
-    - python >=3.7
+    - python >={{ python_min }}
     - mdformat >=0.7.0,<0.8.0
     - mdit-py-plugins >=0.2.7,<0.4.0
 
@@ -30,6 +30,7 @@ test:
   commands:
     - pip check
   requires:
+    - python {{ python_min }}
     - pip
 
 about:
